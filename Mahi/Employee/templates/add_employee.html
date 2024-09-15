@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Form</title>
+    <style>
+        table {
+            width: 30%;
+            border-collapse: collapse;
+        }
+        td, th {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+        th {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h2>Employee Information Form</h2>
+    <form action="/add_employee/" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <th><label for="first_name">First Name:</label></th>
+                <td><input name="first_name" type="text" maxlength="100" placeholder="Enter your first name" required></td>
+            </tr>
+            <tr>
+                <th><label for="last_name">Last Name:</label></th>
+                <td><input name="last_name" type="text" maxlength="100" placeholder="Enter your last name" required></td>
+            </tr>
+            <tr>
+                <th><label for="email">Email:</label></th>
+                <td><input name="email" type="email" placeholder="Enter your email address" required></td>
+            </tr>
+            <tr>
+                <th><label for="mobile">Mobile:</label></th>
+                <td><input name="mobile" type="text" maxlength="15" placeholder="Enter your mobile number" required></td>
+            </tr>
+            <tr>
+                <th><label for="date_of_birth">Date of Birth:</label></th>
+                <td><input name="date_of_birth" type="date" required></td>
+            </tr>
+            <tr>
+                <th><label for="profile_picture">Profile Picture:</label></th>
+                <td><input name="profile_picture" type="file" accept="image/*"></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <button type="submit">Submit</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

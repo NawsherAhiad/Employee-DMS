@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Employee</title>
+    <style>
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        button.update {
+            background-color: #28a745;
+            color: white;
+            border: none;
+        }
+
+        button.cancel {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+        }
+
+        .profile-picture img {
+            max-width: 100px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Edit Employee</h1>
+
+    <!-- Form to edit employee details -->
+    <form action="{% url 'update_employee' employee.id %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="profile-picture">
+            <label>Current Profile Picture:</label>
+            {% if employee.profile_picture %}
+                <img src="{{ employee.profile_picture.url }}" alt="{{ employee.full_name }}">
+            {% else %}
+                <p>No picture available</p>
+            {% endif %}
+        </div>
+        
+        <label for="profile_picture">Change Profile Picture (Optional):</label>
+        <input type="file" id="profile_picture" name="profile_picture">
+    
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first_name" value="{{ employee.first_name }}" required>
+    
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last_name" value="{{ employee.last_name }}" required>
+    
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="{{ employee.email }}" required>
+    
+        <label for="mobile">Mobile:</label>
+        <input type="text" id="mobile" name="mobile" value="{{ employee.mobile }}" required>
+    
+        <label for="date_of_birth">Date of Birth:</label>
+        <input type="date" id="date_of_birth" name="date_of_birth" value="{{ employee.date_of_birth|date:'Y-m-d' }}" required>
+    
+        <button type="submit" class="update">Update</button>
+        <a href="{% url 'update_employee' employee.id %}"><button type="button" class="cancel">Cancel</button></a>
+    </form>
+    
+</body>
+</html>
